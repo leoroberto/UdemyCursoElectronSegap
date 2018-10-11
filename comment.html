@@ -1,0 +1,32 @@
+<head>
+
+</head>
+<body>
+    <form>
+        <div>
+            <label>Digite seu conetário no campo abaixo:</label>
+        </div>
+        <div>
+            <input autofocus />
+        </div>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        const electron = require('electron');
+        /*Extraindo o ipcRenderer via desestruturação, este item faz parte do IPC (Comunicação
+        entre processos )ele será responsável por criar e enviar/receber o para o arquivo index.js
+        */
+        const { ipcRenderer } = electron;
+
+        document.querySelector('form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            //debugger;
+
+            const { value } = document.querySelector('input');
+
+            ipcRenderer.send('addComment', value);
+        });
+    </script>
+
+</body>
